@@ -1,0 +1,1067 @@
+@import "../../../utility/function.scss";
+
+/* font (임시 CDN) */
+@import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css");
+@import url("https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,500;1,600&display=swap");
+
+@font-face {
+  font-family: "SOGANG UNIVERSITY";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2312-1@1.1/SOGANGUNIVERSITYTTF.woff2") format("woff2");
+}
+
+$font-pretendard: "Pretendard", "Apple SD Gothic Neo", sans-serif;
+$font-sogang: "SOGANG UNIVERSITY", "Pretendard", sans-serif;
+$font-playfair: "Playfair Display", serif;
+$font-serif-kr: "Noto Serif KR", serif;
+
+$color-black: #111418;
+$color-blue: #1f4fff;
+$color-blue-strong: #1454ff;
+$color-gray-bg: #f1f3f8;
+$color-line: #dadde2;
+
+.kodex-pension {
+  overflow: hidden;
+  color: $color-black;
+  font-family: $font-pretendard;
+  font-weight: 400;
+  word-break: keep-all;
+  background: #fff;
+
+  img {
+    display: block;
+    max-width: none;
+  }
+
+  button {
+    padding: 0;
+    border: 0;
+    font-family: inherit;
+    background: none;
+    cursor: pointer;
+  }
+
+  // 운영 반영 시 고정 헤더 높이만큼 조정
+  section {
+    scroll-margin-top: 0;
+  }
+}
+
+/* common */
+.pension-inner {
+  width: __vw(1232);
+  margin: 0 auto;
+}
+
+.pension-head {
+  &__kicker {
+    display: flex;
+    align-items: center;
+    gap: __vw(16);
+    padding-bottom: __vw(16);
+    border-bottom: __vw(2) solid $color-black;
+  }
+
+  &__num {
+    color: #8e949b;
+    font-family: $font-serif-kr;
+    font-size: __vw(16);
+    font-weight: 600;
+    line-height: 1.3;
+    letter-spacing: -0.04em;
+  }
+
+  &__label {
+    font-family: $font-playfair;
+    font-size: __vw(26);
+    font-style: italic;
+    font-weight: 600;
+    line-height: 1.3;
+  }
+
+  &__title {
+    margin-top: __vw(32);
+    font-family: $font-sogang;
+    font-size: __vw(56);
+    font-weight: 400;
+    line-height: 1.3;
+    letter-spacing: -0.05em;
+  }
+
+  &__desc {
+    margin-top: __vw(16);
+    color: #111;
+    font-size: __vw(18);
+    line-height: 1.4;
+    letter-spacing: -0.02em;
+  }
+}
+
+/* Hero / Magazine Cover */
+.pension-hero {
+  padding: __vw(80) 0 __vw(72);
+
+  &__inner {
+    display: flex;
+    align-items: center;
+    gap: __vw(96);
+    width: __vw(1232);
+    margin: 0 auto;
+  }
+
+  &__visual {
+    position: relative;
+    flex-shrink: 0;
+    width: __vw(612);
+    height: __vw(761);
+  }
+
+  // 그림자 영역 포함 이미지라 커버 기준 좌상단으로 오프셋
+  &__cover {
+    position: absolute;
+    top: calc(#{__vw(30)} * -1);
+    left: calc(#{__vw(50)} * -1);
+    width: __vw(710);
+    height: auto;
+  }
+
+  &__badge {
+    position: absolute;
+    top: __vw(597);
+    left: __vw(500);
+    width: __vw(140);
+    height: __vw(140);
+  }
+
+  &__copy {
+    width: __vw(524);
+  }
+
+  &__intro {
+    display: flex;
+    flex-direction: column;
+    gap: __vw(16);
+  }
+
+  &__issue {
+    color: #5a7eff;
+    font-family: $font-playfair;
+    font-size: __vw(20);
+    font-style: italic;
+    font-weight: 400;
+    line-height: 1.4;
+  }
+
+  &__title {
+    font-family: $font-sogang;
+    font-size: __vw(44);
+    font-weight: 400;
+    line-height: 1.3;
+    letter-spacing: -0.04em;
+  }
+
+  &__desc {
+    color: #2a2f36;
+    font-size: __vw(18);
+    font-weight: 500;
+    line-height: 1.4;
+    letter-spacing: -0.03em;
+  }
+
+  &__toc {
+    margin-top: __vw(40);
+    border-top: __vw(2) solid $color-black;
+
+    li {
+      border-bottom: __vw(1) solid #d9dde3;
+    }
+
+    a {
+      display: flex;
+      align-items: center;
+      padding: __vw(16) 0;
+
+      &:hover .pension-hero__toc-text {
+        color: $color-blue;
+      }
+
+      &:hover .pension-hero__toc-arrow {
+        transform: translateY(__vw(3));
+      }
+    }
+  }
+
+  &__toc-num {
+    flex-shrink: 0;
+    width: __vw(56);
+    color: $color-blue;
+    font-family: $font-serif-kr;
+    font-size: __vw(17);
+    font-weight: 600;
+    line-height: 1.4;
+    letter-spacing: -0.04em;
+  }
+
+  &__toc-text {
+    flex: 1;
+    font-family: $font-sogang;
+    font-size: __vw(18);
+    font-weight: 400;
+    line-height: 1.4;
+    letter-spacing: -0.03em;
+    transition: color 0.2s;
+  }
+
+  &__toc-arrow {
+    flex-shrink: 0;
+    width: __vw(24);
+    height: __vw(24);
+    transition: transform 0.2s;
+  }
+
+  &__note {
+    padding-top: __vw(20);
+    color: #8b95a1;
+    font-size: __vw(14);
+    line-height: 1.4;
+    letter-spacing: -0.02em;
+  }
+}
+
+/* Editor's Letter */
+.pension-letter {
+  padding: __vw(80) 0 __vw(130);
+  background: #fff;
+
+  &__inner {
+    display: flex;
+    gap: __vw(256);
+    width: __vw(1232);
+    margin: 0 auto;
+    padding-top: __vw(32);
+    border-top: __vw(2) solid $color-black;
+  }
+
+  &__head {
+    display: flex;
+    flex-direction: column;
+    gap: __vw(8);
+    flex-shrink: 0;
+    width: __vw(255);
+  }
+
+  &__title {
+    font-family: $font-playfair;
+    font-size: __vw(40);
+    font-style: italic;
+    font-weight: 600;
+    line-height: 1.3;
+  }
+
+  &__sub {
+    color: #767676;
+    font-size: __vw(15);
+    line-height: 1.4;
+    letter-spacing: -0.02em;
+  }
+
+  &__body {
+    width: __vw(721);
+    min-height: __vw(265);
+  }
+
+  &__headline {
+    position: relative;
+  }
+
+  &__line {
+    font-family: $font-sogang;
+    font-size: __vw(56);
+    font-weight: 400;
+    line-height: 1.3;
+    letter-spacing: -0.05em;
+
+    &--answer {
+      display: flex;
+      gap: __vw(12);
+    }
+  }
+
+  &__strike {
+    color: #8e949b;
+    text-decoration: line-through;
+  }
+
+  &__brand {
+    display: flex;
+    gap: __vw(4);
+
+    em {
+      color: $color-blue;
+      font-family: $font-playfair;
+      font-size: __vw(58);
+      font-style: normal;
+      font-weight: 700;
+      line-height: 1.2;
+      letter-spacing: -0.05em;
+    }
+  }
+
+  &__scribble {
+    position: absolute;
+    top: __vw(29);
+    left: __vw(108);
+    width: __vw(227);
+    height: __vw(22);
+    pointer-events: none;
+  }
+
+  &__text {
+    margin-top: __vw(16);
+    color: #111;
+    font-size: __vw(18);
+    line-height: 1.5;
+    letter-spacing: -0.02em;
+  }
+}
+
+/* 01 Feature / Calculator */
+.pension-feature {
+  padding: __vw(130) 0;
+  background: $color-gray-bg;
+}
+
+.pension-calc {
+  display: flex;
+  margin-top: __vw(64);
+  border-top: __vw(2) solid #000;
+  border-bottom: __vw(2) solid #000;
+  background: #fff;
+
+  &__input {
+    display: flex;
+    flex-direction: column;
+    gap: __vw(40);
+    width: 50%;
+    padding: __vw(64);
+    border-right: __vw(1) solid $color-line;
+  }
+
+  &__output {
+    width: 50%;
+    padding: __vw(64) __vw(72);
+  }
+
+  &__label {
+    color: #111;
+    font-size: __vw(24);
+    font-weight: 700;
+    line-height: 1.4;
+    letter-spacing: -0.02em;
+  }
+
+  &__amount-value {
+    display: flex;
+    align-items: flex-end;
+    gap: __vw(8);
+    margin-top: __vw(8);
+
+    strong {
+      font-family: $font-serif-kr;
+      font-size: __vw(64);
+      font-weight: 700;
+      line-height: 1.3;
+      letter-spacing: -0.02em;
+    }
+
+    span {
+      padding-bottom: __vw(10);
+      font-family: $font-sogang;
+      font-size: __vw(24);
+      font-weight: 400;
+      line-height: 1.3;
+      letter-spacing: -0.02em;
+    }
+  }
+
+  &__slider {
+    display: flex;
+    flex-direction: column;
+    gap: __vw(12);
+
+    input[type="range"] {
+      --thumb-size: #{__vw(24)};
+
+      width: 100%;
+      height: __vw(24);
+      margin: 0;
+      background:
+        linear-gradient($color-blue, $color-blue) 0 50% / calc(var(--thumb-size) / 2 + (100% - var(--thumb-size)) * var(--ratio)) __vw(2) no-repeat,
+        linear-gradient($color-line, $color-line) 0 50% / 100% __vw(2) no-repeat;
+      cursor: pointer;
+      appearance: none;
+      -webkit-appearance: none;
+
+      &:focus {
+        outline: none;
+      }
+
+      &:focus-visible::-webkit-slider-thumb {
+        box-shadow: 0 0 0 __vw(4) rgba(31, 79, 255, 0.2);
+      }
+
+      &::-webkit-slider-thumb {
+        width: var(--thumb-size);
+        height: var(--thumb-size);
+        border: __vw(6) solid $color-blue;
+        border-radius: 50%;
+        background: #fff;
+        appearance: none;
+        -webkit-appearance: none;
+      }
+
+      &::-moz-range-thumb {
+        box-sizing: border-box;
+        width: var(--thumb-size);
+        height: var(--thumb-size);
+        border: __vw(6) solid $color-blue;
+        border-radius: 50%;
+        background: #fff;
+      }
+    }
+  }
+
+  &__slider-ends {
+    display: flex;
+    justify-content: space-between;
+    color: #767676;
+    font-size: __vw(15);
+    font-weight: 500;
+    line-height: __vw(22);
+    letter-spacing: -0.02em;
+  }
+
+  &__option {
+    display: flex;
+    flex-direction: column;
+    gap: __vw(12);
+  }
+
+  &__option-label {
+    color: #111;
+    font-size: __vw(15);
+    font-weight: 700;
+    line-height: 1.4;
+    letter-spacing: -0.02em;
+  }
+
+  &__toggle {
+    display: flex;
+    background: #f1f3f6;
+
+    button {
+      flex: 1;
+      height: __vw(56);
+      color: #5c636c;
+      font-size: __vw(17);
+      font-weight: 500;
+      line-height: 1.4;
+      letter-spacing: -0.02em;
+      transition: background-color 0.2s, color 0.2s;
+
+      &.is-active {
+        color: #fff;
+        font-weight: 700;
+        background: $color-blue-strong;
+      }
+    }
+  }
+
+  &__note {
+    color: #8e949b;
+    font-size: __vw(13);
+    line-height: 1.4;
+    letter-spacing: -0.02em;
+  }
+
+  &__result {
+    display: flex;
+    flex-direction: column;
+    gap: __vw(24);
+    margin-top: __vw(2);
+  }
+
+  &__result-value {
+    display: flex;
+    align-items: center;
+    gap: __vw(12);
+
+    strong {
+      color: $color-blue;
+      font-family: $font-serif-kr;
+      font-size: __vw(84);
+      font-weight: 700;
+      line-height: 1.3;
+      letter-spacing: -0.04em;
+    }
+
+    span {
+      padding-top: __vw(26);
+      font-family: $font-sogang;
+      font-size: __vw(36);
+      font-weight: 400;
+      line-height: 1.3;
+      letter-spacing: -0.02em;
+    }
+  }
+
+  &__result-desc {
+    color: #5c636c;
+    font-size: __vw(16);
+    line-height: 1.4;
+    letter-spacing: -0.02em;
+  }
+
+  &__message {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: __vw(193);
+    margin-top: __vw(80);
+    padding: __vw(24);
+    background: $color-gray-bg;
+
+    p {
+      width: __vw(344);
+      font-size: __vw(24);
+      font-weight: 500;
+      line-height: 1.4;
+      letter-spacing: -0.03em;
+    }
+
+    strong {
+      color: $color-blue-strong;
+      font-weight: 700;
+    }
+  }
+}
+
+/* 02 Guide / Accounts */
+.pension-guide {
+  padding: __vw(130) 0;
+  background: #fff;
+
+  &__band {
+    width: 100%;
+    height: __vw(399);
+    margin-top: __vw(64);
+    object-fit: cover;
+  }
+
+  &__cards {
+    display: flex;
+    gap: __vw(32);
+    margin-top: __vw(64);
+  }
+
+  &__card {
+    flex: 1;
+  }
+
+  &__eyebrow {
+    color: $color-blue;
+    font-family: $font-playfair;
+    font-size: __vw(20);
+    font-style: italic;
+    font-weight: 500;
+    line-height: 1.4;
+  }
+
+  &__name {
+    margin-top: __vw(12);
+    font-size: __vw(36);
+    font-weight: 700;
+    line-height: 1.3;
+    letter-spacing: -0.04em;
+  }
+
+  &__desc {
+    margin-top: __vw(12);
+    color: #4d4d4d;
+    font-size: __vw(16);
+    line-height: 1.4;
+    letter-spacing: -0.02em;
+  }
+
+  &__info {
+    margin: __vw(16) 0 0;
+    border-top: __vw(1) solid $color-black;
+
+    div {
+      display: flex;
+      justify-content: space-between;
+      padding: __vw(14) 0;
+      border-bottom: __vw(1) solid $color-line;
+    }
+
+    dt {
+      color: #767676;
+      font-size: __vw(15);
+      line-height: 1.4;
+      letter-spacing: -0.02em;
+    }
+
+    dd {
+      margin: 0;
+      font-size: __vw(15);
+      font-weight: 700;
+      line-height: 1.4;
+      letter-spacing: -0.02em;
+    }
+  }
+
+  &__more {
+    display: inline-block;
+    margin-top: __vw(20);
+    font-family: $font-playfair;
+    font-size: __vw(18);
+    font-style: italic;
+    font-weight: 600;
+    line-height: 1.4;
+    transition: color 0.2s;
+
+    &:hover {
+      color: $color-blue;
+    }
+  }
+}
+
+/* 03 Cover Story / Products */
+.pension-story {
+  padding: __vw(130) 0;
+  background: $color-gray-bg;
+
+  &__list {
+    display: flex;
+    flex-direction: column;
+    gap: __vw(32);
+    margin-top: __vw(48);
+  }
+
+  &__lead {
+    display: flex;
+    background: #fff;
+  }
+
+  &__lead-img {
+    width: __vw(700);
+    height: __vw(500);
+    object-fit: cover;
+  }
+
+  &__lead-text {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: __vw(56) __vw(64);
+  }
+
+  &__eyebrow {
+    color: $color-blue;
+    font-size: __vw(15);
+    font-weight: 700;
+    line-height: 1.4;
+    letter-spacing: -0.01em;
+  }
+
+  &__lead-title {
+    margin-top: __vw(16);
+    font-family: $font-sogang;
+    font-size: __vw(44);
+    font-weight: 400;
+    line-height: 1.3;
+    letter-spacing: -0.05em;
+  }
+
+  &__desc {
+    margin-top: __vw(16);
+    color: #2a2f36;
+    font-size: __vw(18);
+    font-weight: 500;
+    line-height: 1.4;
+    letter-spacing: -0.03em;
+  }
+
+  &__facts {
+    display: flex;
+    margin: 0;
+    padding-top: __vw(20);
+    border-top: __vw(1) solid $color-black;
+
+    div {
+      display: flex;
+      flex-direction: column;
+      gap: __vw(4);
+      width: __vw(158);
+
+      &:last-child {
+        width: auto;
+      }
+    }
+
+    dt {
+      color: #767676;
+      font-size: __vw(15);
+      line-height: 1.4;
+      letter-spacing: -0.02em;
+    }
+
+    dd {
+      margin: 0;
+      font-size: __vw(16);
+      font-weight: 700;
+      line-height: 1.4;
+      letter-spacing: -0.02em;
+    }
+  }
+
+  &__side {
+    display: flex;
+    gap: __vw(24);
+  }
+
+  &__card {
+    display: flex;
+    flex: 1;
+    align-items: center;
+    gap: __vw(32);
+    padding: __vw(32) __vw(36) __vw(32) __vw(32);
+    background: #fff;
+
+    .pension-story__desc {
+      margin-top: __vw(10);
+    }
+  }
+
+  &__card-img {
+    flex-shrink: 0;
+    width: __vw(200);
+    height: __vw(200);
+    object-fit: cover;
+  }
+
+  &__card-text {
+    flex: 1;
+  }
+
+  &__card-title {
+    margin-top: __vw(10);
+    font-family: $font-sogang;
+    font-size: __vw(28);
+    font-weight: 400;
+    line-height: 1.3;
+    letter-spacing: -0.05em;
+  }
+
+  &__note {
+    margin-top: __vw(48);
+    color: #8e949b;
+    font-size: __vw(13);
+    line-height: 1.4;
+    letter-spacing: -0.02em;
+  }
+}
+
+/* 04 How-to / Steps */
+.pension-howto {
+  padding: __vw(160) 0;
+  background: #fff;
+
+  &__inner {
+    display: flex;
+    align-items: center;
+    gap: __vw(96);
+    width: __vw(1232);
+    margin: 0 auto;
+  }
+
+  &__portrait {
+    position: relative;
+    flex-shrink: 0;
+    width: __vw(584);
+    height: __vw(634);
+  }
+
+  &__img {
+    width: 100%;
+    height: __vw(623);
+    object-fit: cover;
+  }
+
+  &__quote {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: __vw(6);
+    position: absolute;
+    top: __vw(546);
+    left: 0;
+    width: 100%;
+    height: __vw(132);
+    margin: 0;
+    background: #e5f0ff;
+    clip-path: polygon(0 0, 100% 0, 100% 67.45%, 92.98% 100%, 0 100%);
+
+    p {
+      color: #000;
+      font-family: $font-sogang;
+      font-size: __vw(28);
+      font-weight: 400;
+      line-height: 1.3;
+      letter-spacing: -0.04em;
+      white-space: pre;
+    }
+  }
+
+  &__quote-line {
+    display: block;
+    width: __vw(361);
+    height: __vw(1);
+    background: #c6daf6;
+  }
+
+  &__content {
+    flex: 1;
+  }
+
+  &__head {
+    margin-top: __vw(48);
+  }
+
+  &__title {
+    font-family: $font-sogang;
+    font-size: __vw(56);
+    font-weight: 400;
+    line-height: 1.3;
+    letter-spacing: -0.05em;
+  }
+
+  &__desc {
+    margin-top: __vw(16);
+    color: #111;
+    font-size: __vw(18);
+    line-height: 1.4;
+    letter-spacing: -0.02em;
+  }
+
+  &__steps {
+    margin-top: __vw(48);
+  }
+
+  &__step {
+    display: flex;
+    align-items: center;
+    gap: __vw(32);
+    padding: __vw(32) 0;
+    border-top: __vw(1) solid $color-line;
+
+    &:first-child {
+      border-top: __vw(2) solid $color-black;
+    }
+  }
+
+  &__step-num {
+    flex-shrink: 0;
+    width: __vw(55);
+    color: $color-blue;
+    font-family: $font-serif-kr;
+    font-size: __vw(48);
+    font-weight: 700;
+    line-height: 1.3;
+    letter-spacing: -0.04em;
+  }
+
+  &__step-text {
+    width: __vw(405);
+    padding-top: __vw(8);
+  }
+
+  &__step-title {
+    position: relative;
+    display: inline-block;
+    color: #111;
+    font-size: __vw(24);
+    font-weight: 600;
+    line-height: 1.3;
+    letter-spacing: -0.04em;
+    transition: color 0.4s ease 0.15s;
+
+    // 체크되면 왼쪽부터 선이 그어짐
+    &::after {
+      content: "";
+      position: absolute;
+      top: 52%;
+      left: 0;
+      width: 100%;
+      height: __vw(2);
+      background: currentColor;
+      transform: scaleX(0);
+      transform-origin: left center;
+      transition: transform 0.6s cubic-bezier(0.65, 0, 0.35, 1) 0.15s;
+    }
+  }
+
+  &__step-desc {
+    margin-top: __vw(8);
+    color: #111;
+    font-size: __vw(16);
+    font-weight: 500;
+    line-height: 1.4;
+    letter-spacing: -0.02em;
+    transition: color 0.4s ease 0.15s;
+  }
+
+  &__check {
+    flex-shrink: 0;
+    width: __vw(28);
+    height: __vw(28);
+    margin-left: auto;
+
+    svg {
+      display: block;
+      width: 100%;
+      height: 100%;
+      overflow: visible;
+    }
+  }
+
+  &__check-box {
+    fill: #fff;
+    stroke: #797c81;
+    stroke-width: 1;
+    transition: fill 0.3s ease, stroke 0.3s ease, stroke-width 0.3s ease;
+  }
+
+  &__check-mark {
+    fill: none;
+    stroke: #fff;
+    stroke-width: 3;
+    stroke-linecap: square;
+    stroke-dasharray: 20;
+    stroke-dashoffset: 20;
+    transition: stroke-dashoffset 0.35s ease 0.2s;
+  }
+
+  &__step.is-done {
+    .pension-howto__check {
+      animation: pension-check-press 0.45s ease;
+    }
+
+    .pension-howto__check-box {
+      fill: $color-blue;
+      stroke: $color-blue;
+      stroke-width: 2;
+    }
+
+    .pension-howto__check-mark {
+      stroke-dashoffset: 0;
+    }
+
+    .pension-howto__step-title {
+      color: #8e949b;
+
+      &::after {
+        transform: scaleX(1);
+      }
+    }
+
+    .pension-howto__step-desc {
+      color: #5c636c;
+      font-weight: 400;
+    }
+  }
+}
+
+@keyframes pension-check-press {
+  0% {
+    transform: scale(1);
+  }
+
+  40% {
+    transform: scale(0.82);
+  }
+
+  100% {
+    transform: scale(1);
+  }
+}
+
+/* Back Cover / CTA */
+.pension-cta {
+  padding: __vw(80) 0 __vw(60);
+  color: #fff;
+  background:
+    linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+    url("../../../../assets/images/kodex/pension/cta-bg.jpg") center / cover no-repeat;
+
+  &__row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: __vw(32);
+  }
+
+  &__text {
+    display: flex;
+    flex-direction: column;
+    gap: __vw(10);
+  }
+
+  &__title {
+    font-size: __vw(44);
+    font-weight: 600;
+    line-height: 1.3;
+    letter-spacing: -0.04em;
+  }
+
+  &__desc {
+    font-size: __vw(18);
+    line-height: 1.4;
+    letter-spacing: -0.02em;
+  }
+
+  &__btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    width: __vw(300);
+    height: __vw(64);
+    font-size: __vw(18);
+    font-weight: 600;
+    line-height: 1.4;
+    letter-spacing: -0.02em;
+    background: rgba(255, 255, 255, 0.3);
+    backdrop-filter: blur(__vw(8));
+    transition: background-color 0.2s;
+
+    &:hover {
+      background: rgba(255, 255, 255, 0.4);
+    }
+  }
+
+  &__meta {
+    margin-top: __vw(56);
+    padding-top: __vw(16);
+    font-family: $font-playfair;
+    font-size: __vw(16);
+    font-style: italic;
+    font-weight: 400;
+    line-height: 1.4;
+  }
+}

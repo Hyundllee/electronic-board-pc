@@ -1,0 +1,85 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "tdf-pc-dev",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": [
+        "run",
+        "dev"
+      ],
+      "port": 3000
+    },
+    {
+      "name": "kodex-pension-dev",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": [
+        "run",
+        "dev",
+        "--",
+        "--port",
+        "3001",
+        "--no-open"
+      ],
+      "port": 3001
+    },
+    {
+      "name": "kodex-pension-mob-dev",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": [
+        "--prefix",
+        "../kodex-pension-mob",
+        "run",
+        "dev",
+        "--",
+        "--port",
+        "3010",
+        "--no-open"
+      ],
+      "port": 3010
+    },
+    {
+      "name": "electronic-board-pc-dev",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": [
+        "run",
+        "dev",
+        "--",
+        "--port",
+        "3002",
+        "--no-open"
+      ],
+      "port": 3002
+    },
+    {
+      "name": "electronic-board-mob-dev",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": [
+        "--prefix",
+        "/Users/donghyun/Desktop/work/electronic-board/electronic-board-mob",
+        "run",
+        "dev",
+        "--",
+        "--port",
+        "3011",
+        "--no-open"
+      ],
+      "port": 3011
+    },
+    {
+      "name": "electronic-board-pc-main-dev",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": [
+        "--prefix",
+        "/Users/donghyun/Desktop/work/electronic-board/electronic-board-pc",
+        "run",
+        "dev",
+        "--",
+        "--port",
+        "3003",
+        "--no-open"
+      ],
+      "port": 3003
+    }
+  ]
+}

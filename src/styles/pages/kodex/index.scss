@@ -1,0 +1,369 @@
+@import "../../utility/function.scss";
+
+/* font (임시 CDN) */
+@import url("https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap");
+
+$font-pretendard: "Pretendard", "Apple SD Gothic Neo", sans-serif;
+$font-led: "Share Tech Mono", ui-monospace, monospace;
+
+$led-bezel-from: #4a5284;
+$led-bezel-to: #5b6395;
+$led-screen: #2a3463;
+$led-label: #eef1ff;
+$led-num: #aeb8e0;
+$led-up: #ff74c3;
+$led-down: #8db4ff;
+
+$led-num-rgb: 174, 184, 224;
+$led-up-rgb: 255, 116, 195;
+$led-down-rgb: 141, 180, 255;
+
+/* 전광판 흐름 속도 (px / sec) — 트랙 폭에 맞춰 스크립트가 duration 을 계산 */
+$led-flow-speed: 60;
+
+.kodex-led {
+  /* 전광판 베젤 */
+  display: flex;
+  align-items: flex-start;
+  width: 100%;
+  height: __vw(56);
+  padding: __vw(5);
+  border-radius: __vw(10);
+  background: linear-gradient(180deg, $led-bezel-from 0%, $led-bezel-to 100%);
+  box-shadow: inset 0 __vw(1) 0 0 rgba(255, 255, 255, 0.12);
+
+  /* LED 화면 */
+  &__screen {
+    position: relative;
+    display: flex;
+    flex: 1 0 0;
+    align-self: stretch;
+    align-items: center;
+    overflow: hidden;
+    border-radius: __vw(4);
+    background-color: $led-screen;
+    background-image: url("../../../assets/images/kodex/led-dot.svg");
+    background-repeat: repeat;
+    background-size: __vw(4) __vw(4);
+    box-shadow:
+      inset 0 __vw(-2) __vw(4) 0 rgba(255, 255, 255, 0.06),
+      inset 0 __vw(3) __vw(8) 0 rgba(0, 0, 0, 0.5);
+  }
+
+  /* 화면 하단 라인 */
+  &__sheen {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 2;
+    height: __vw(2);
+    pointer-events: none;
+    background: linear-gradient(
+      90deg,
+      rgba(21, 23, 26, 0.8) 0%,
+      rgba(58, 63, 70, 0.8) 50%,
+      rgba(21, 23, 26, 0.8) 100%
+    );
+  }
+
+  &__viewport {
+    display: flex;
+    flex: 1 0 0;
+    align-self: stretch;
+    align-items: center;
+    overflow: hidden;
+  }
+
+  /* 좌 → 우 로 흐르는 트랙 (동일한 시퀀스 2벌) */
+  &__track {
+    display: inline-flex;
+    align-items: center;
+    width: max-content;
+    animation: kodex-led-flow var(--led-flow-duration, 60s) linear infinite;
+  }
+
+  &__screen:hover &__track {
+    animation-play-state: paused;
+  }
+
+  &__seq {
+    display: flex;
+    align-items: center;
+  }
+
+  &__item {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: __vw(14);
+    height: __vw(22);
+    padding: 0 __vw(26);
+    white-space: nowrap;
+
+    &.is-up {
+      --led-dir-color: #{$led-up};
+      --led-dir-rgb: #{$led-up-rgb};
+    }
+
+    &.is-down {
+      --led-dir-color: #{$led-down};
+      --led-dir-rgb: #{$led-down-rgb};
+    }
+
+    &.is-flat {
+      --led-dir-color: #{$led-num};
+      --led-dir-rgb: #{$led-num-rgb};
+    }
+
+    /* 갱신 순간 종목 하이라이트 */
+    &::after {
+      content: "";
+      position: absolute;
+      inset: __vw(-5) __vw(12);
+      border-radius: __vw(4);
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    &.is-flash-up::after {
+      background: rgba($led-up, 0.22);
+      box-shadow:
+        inset 0 0 0 1px rgba($led-up, 0.55),
+        0 0 __vw(18) rgba($led-up, 0.35);
+      animation: kodex-led-glow 1.1s ease-out;
+    }
+
+    &.is-flash-down::after {
+      background: rgba($led-down, 0.22);
+      box-shadow:
+        inset 0 0 0 1px rgba($led-down, 0.55),
+        0 0 __vw(18) rgba($led-down, 0.35);
+      animation: kodex-led-glow 1.1s ease-out;
+    }
+  }
+
+  &__name {
+    font-family: $font-pretendard;
+    font-size: __vw(16);
+    font-weight: 700;
+    line-height: __vw(22);
+    color: $led-label;
+    text-shadow: 0 0 __vw(3) rgba(238, 241, 255, 0.35);
+  }
+
+  &__price {
+    display: flex;
+    align-items: baseline;
+    gap: __vw(2);
+  }
+
+  &__unit {
+    font-family: $font-pretendard;
+    font-size: __vw(16);
+    font-weight: 500;
+    line-height: __vw(22);
+    color: $led-num;
+    text-shadow: 0 0 __vw(4) rgba($led-num, 0.6);
+  }
+
+  &__change {
+    display: flex;
+    align-items: center;
+    gap: __vw(6);
+    color: var(--led-dir-color, #{$led-num});
+    text-shadow: 0 0 __vw(6) rgba(var(--led-dir-rgb, #{$led-num-rgb}), 0.6);
+  }
+
+  &__arrow {
+    flex: none;
+    width: __vw(12);
+    height: __vw(9);
+    fill: currentColor;
+    transform: rotate(var(--led-arrow-rotate, 0deg));
+    filter: drop-shadow(0 0 __vw(6) rgba(var(--led-dir-rgb, #{$led-num-rgb}), 0.6));
+
+    &.is-up {
+      --led-arrow-rotate: 180deg;
+    }
+  }
+
+  &__digits {
+    display: inline-flex;
+    align-items: flex-start;
+    font-family: $font-led;
+    font-size: __vw(18);
+    font-weight: 400;
+    line-height: __vw(22);
+    font-variant-numeric: tabular-nums;
+  }
+
+  &__price &__digits {
+    color: $led-num;
+    text-shadow: 0 0 __vw(4) rgba($led-num, 0.6);
+  }
+
+  /* 숫자 롤링 셀 — 바뀐 자리만 위·아래로 교체 */
+  &__cell {
+    position: relative;
+    display: inline-block;
+    overflow: hidden;
+    height: __vw(22);
+    line-height: __vw(22);
+    vertical-align: top;
+  }
+
+  &__cell-new,
+  &__cell-old {
+    display: block;
+  }
+
+  &__cell-old {
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+
+  &__cell.is-roll-up {
+    .kodex-led__cell-new {
+      animation: kodex-led-in-bottom 0.42s cubic-bezier(0.2, 0.8, 0.2, 1) var(--led-roll-delay, 0ms) both;
+    }
+
+    .kodex-led__cell-old {
+      animation: kodex-led-out-top 0.42s cubic-bezier(0.2, 0.8, 0.2, 1) var(--led-roll-delay, 0ms) both;
+    }
+  }
+
+  &__cell.is-roll-down {
+    .kodex-led__cell-new {
+      animation: kodex-led-in-top 0.42s cubic-bezier(0.2, 0.8, 0.2, 1) var(--led-roll-delay, 0ms) both;
+    }
+
+    .kodex-led__cell-old {
+      animation: kodex-led-out-bottom 0.42s cubic-bezier(0.2, 0.8, 0.2, 1) var(--led-roll-delay, 0ms) both;
+    }
+  }
+
+  /* 갱신 순간 현재가가 잠깐 등락 색으로 바뀌었다가 복귀 */
+  &__item.is-flash-up &__price &__digits,
+  &__item.is-flash-down &__price &__digits {
+    animation: kodex-led-price-flash 1.1s ease-out;
+  }
+
+  /* 갱신 순간 화살표가 한 번 튀어오름 */
+  &__item.is-flash-up &__arrow,
+  &__item.is-flash-down &__arrow {
+    animation: kodex-led-arrow-pop 0.5s ease-out;
+  }
+}
+
+@keyframes kodex-led-flow {
+  from {
+    transform: translate3d(-50%, 0, 0);
+  }
+
+  to {
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes kodex-led-in-bottom {
+  from {
+    transform: translateY(100%);
+  }
+
+  to {
+    transform: none;
+  }
+}
+
+@keyframes kodex-led-out-top {
+  to {
+    transform: translateY(-100%);
+  }
+}
+
+@keyframes kodex-led-in-top {
+  from {
+    transform: translateY(-100%);
+  }
+
+  to {
+    transform: none;
+  }
+}
+
+@keyframes kodex-led-out-bottom {
+  to {
+    transform: translateY(100%);
+  }
+}
+
+@keyframes kodex-led-glow {
+  0% {
+    opacity: 0;
+  }
+
+  12% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes kodex-led-price-flash {
+  0%,
+  12% {
+    color: var(--led-dir-color, #{$led-num});
+  }
+
+  100% {
+    color: $led-num;
+  }
+}
+
+@keyframes kodex-led-arrow-pop {
+  0% {
+    transform: rotate(var(--led-arrow-rotate, 0deg)) scale(1);
+  }
+
+  40% {
+    transform: rotate(var(--led-arrow-rotate, 0deg)) scale(1.6);
+  }
+
+  100% {
+    transform: rotate(var(--led-arrow-rotate, 0deg)) scale(1);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .kodex-led {
+    &__track {
+      animation: none;
+    }
+
+    &__viewport {
+      overflow-x: auto;
+    }
+
+    &__cell-old {
+      display: none;
+    }
+
+    &__cell-new {
+      animation: none !important;
+    }
+
+    &__item.is-flash-up::after,
+    &__item.is-flash-down::after {
+      animation: none;
+    }
+
+    &__item.is-flash-up &__arrow,
+    &__item.is-flash-down &__arrow {
+      animation: none;
+    }
+  }
+}
